@@ -16,4 +16,17 @@ public class CategoriesController {
     public ResultBean<Categories> getById(@RequestParam("categoryid") int categoryid){
         return categoriesService.getById(categoryid);
     }
+    @PostMapping("/category/create")
+    public ResultBean<Categories> create(@RequestParam("name") String name){
+        return categoriesService.create(name);
+    }
+    @PostMapping("/category/delete")
+    public ResultBean<Categories> delete(@RequestParam("name") String name){
+        return categoriesService.delete(name);
+    }
+    @PostMapping("/category/update")
+    public ResultBean<Categories> update(@RequestParam("oldname") String oldname,@RequestParam("newname") String newname){
+        return categoriesService.update(oldname,newname);
+    }
+
 }
