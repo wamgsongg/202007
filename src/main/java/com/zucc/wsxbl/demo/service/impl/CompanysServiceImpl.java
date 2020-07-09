@@ -36,6 +36,7 @@ public class CompanysServiceImpl implements CompanysService {
             String hashedPassword = passwordEncoder.encode(companys.getCompanyPwd());
             entity.setCompanyPwd(hashedPassword);
             companysRepository.save(entity);
+            entity = companysRepository.findCompanysEntityByCompanyLogin(companys.getCompanyLogin());
             MyBeanUtils.copyProperties(entity,company);
             ret.setData(company);
         }
@@ -75,7 +76,8 @@ public class CompanysServiceImpl implements CompanysService {
         CompanysEntity entity = new CompanysEntity();
         Companys c = Companys.builder().build();
         entity = companysRepository.findCompanysEntityByCompanyLogin(companys.getCompanyLogin());
-        if (entity!=null){
+
+        if (entity!=null&&companys.getCompanyId()!=0){
              MyBeanUtils.copyProperties(companys,entity);
             companysRepository.save(entity);
             MyBeanUtils.copyProperties(entity,c);

@@ -33,6 +33,7 @@ public class StaffServiceImpl implements StaffService {
             String hashedPassword = passwordEncoder.encode(staff.getStaffPwd());
             entity.setStaffPwd(hashedPassword);
             staffRepository.save(entity);
+            entity = staffRepository.findStaffEntityByStaffLogin(staff.getStaffLogin());
             MyBeanUtils.copyProperties(entity,s);
             ret.setData(s);
         }
@@ -93,7 +94,7 @@ public class StaffServiceImpl implements StaffService {
         StaffEntity entity = new StaffEntity();
         Staff s = Staff.builder().build();
         entity = staffRepository.findStaffEntityByStaffLogin(staff.getStaffLogin());
-        if (entity!=null){
+        if (entity!=null&&staff.getStaffId()!=0){
             MyBeanUtils.copyProperties(staff,entity);
             staffRepository.save(entity);
             MyBeanUtils.copyProperties(entity,s);
