@@ -63,4 +63,24 @@ public class StaffServiceImpl implements StaffService {
 
         return ret;
     }
+
+    @Override
+    public ResultBean<Staff> staffAddCompany(int cid, String cat, String name) {
+        ResultBean<Staff> ret = new ResultBean<>();
+        Staff staff = Staff.builder().build();
+        StaffEntity entity = new StaffEntity();
+        entity = staffRepository.findStaffEntityByStaffLogin(name);
+        if (entity!=null){
+            entity.setStaffCategory(cat);
+            entity.setStaffCompany(cid);
+            staffRepository.save(entity);
+            MyBeanUtils.copyProperties(entity,staff);
+            ret.setData(staff);
+        }else {
+            ret.setMsg("fail");
+            ret.setCode(ResultBean.FAIL);
+        }
+
+        return ret;
+    }
 }

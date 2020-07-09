@@ -10,7 +10,7 @@ public class Staff {
     private String staffName;
     private String staffPhoto;
     private String staffCategory;
-    private String staffCompany;
+    private int staffCompany;
     private String staffLogin;
     private String staffPwd;
 }

@@ -23,4 +23,8 @@ public class StaffController {
     public ResultBean<Staff> staffLogin(@RequestParam("login") String login,@RequestParam("pwd") String pwd){
         return staffService.staffLogin(login,pwd);
     }
+    @PostMapping("/staff/addcompany")
+    public ResultBean<Staff> staffAddCompany(@RequestParam("cid")int cid,@RequestParam("cat") String cat,@RequestParam("name")String name){
+        return staffService.staffAddCompany(cid,cat,name);
+    }
 }

@@ -10,7 +10,7 @@ public class StaffEntity {
     private String staffName;
     private String staffPhone;
     private String staffCategory;
-    private String staffCompany;
+    private int staffCompany;
     private String staffLogin;
     private String staffPwd;
 
@@ -56,11 +56,11 @@ public class StaffEntity {
 
     @Basic
     @Column(name = "staff_company")
-    public String getStaffCompany() {
+    public int getStaffCompany() {
         return staffCompany;
     }
 
-    public void setStaffCompany(String staffCompany) {
+    public void setStaffCompany(int staffCompany) {
         this.staffCompany = staffCompany;
     }
 

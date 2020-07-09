@@ -10,6 +10,7 @@ import java.util.Date;
 @Builder
 public class Dangers {
     private int dangerId;
+    private String dangerCompany;
     private String dangerCategory;
     private String dangerOrigin;//隐患源
     private String dangerLevel;

@@ -8,6 +8,7 @@ import java.util.Objects;
 @Table(name = "Dangers", schema = "202007", catalog = "")
 public class DangersEntity {
     private int dangerId;
+    private String dangerCompany;
     private String dangerCategory;
     private String dangerOrigin;
     private String dangerLevel;
@@ -28,6 +29,16 @@ public class DangersEntity {
 
     public void setDangerId(int dangerId) {
         this.dangerId = dangerId;
+    }
+
+    @Basic
+    @Column(name = "danger_company")
+    public String getDangerCompany() {
+        return dangerCompany;
+    }
+
+    public void setDangerCompany(String dangerCompany) {
+        this.dangerCompany = dangerCompany;
     }
 
     @Basic
