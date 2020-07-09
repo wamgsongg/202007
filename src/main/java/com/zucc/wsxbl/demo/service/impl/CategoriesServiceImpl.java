@@ -42,9 +42,10 @@ public class CategoriesServiceImpl implements CategoriesService{
             ret.setCode(ResultBean.FAIL);
 
         }else {
-            categories.setCategoryName(name);
-            MyBeanUtils.copyProperties(categories,entity);
+            entity.setCategoryName(name);
             categoriesRepository.save(entity);
+            entity = categoriesRepository.findCategoriesEntityByCategoryName(name);
+            MyBeanUtils.copyProperties(entity,categories);
             ret.setData(categories);
         }
         return ret;
