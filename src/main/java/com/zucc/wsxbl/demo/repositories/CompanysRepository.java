@@ -10,4 +10,5 @@ public interface CompanysRepository extends JpaRepository<CompanysEntity,Integer
     Boolean existsCompanysEntityByCompanyName(String name);
     Boolean existsCompanysEntityByCompanyLogin(String login);
     CompanysEntity findCompanysEntityByCompanyLogin(String login);
+
 }

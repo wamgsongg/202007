@@ -10,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class StaffServiceImpl implements StaffService {
     @Autowired
@@ -81,6 +84,45 @@ public class StaffServiceImpl implements StaffService {
             ret.setCode(ResultBean.FAIL);
         }
 
+        return ret;
+    }
+
+    @Override
+    public ResultBean<Staff> staffUpdate(Staff staff) {
+        ResultBean<Staff> ret = new ResultBean<>();
+        StaffEntity entity = new StaffEntity();
+        Staff s = Staff.builder().build();
+        entity = staffRepository.findStaffEntityByStaffLogin(staff.getStaffLogin());
+        if (entity!=null){
+            MyBeanUtils.copyProperties(staff,entity);
+            staffRepository.save(entity);
+            MyBeanUtils.copyProperties(entity,s);
+            ret.setData(s);
+        }else {
+            ret.setCode(ResultBean.FAIL);
+            ret.setMsg("fail");
+        }
+
+        return ret;
+    }
+
+    @Override
+    public ResultBean<List<Staff>> getByCompany(int cid) {
+        ResultBean<List<Staff>> ret = new ResultBean<>();
+        List<Staff> list = new ArrayList<>();
+        List<StaffEntity> entities = new ArrayList<>();
+        entities = staffRepository.findStaffEntitiesByStaffCompany(cid);
+        if (entities.size()!=0){
+            for(StaffEntity entity : entities){
+                Staff s = Staff.builder().build();
+                MyBeanUtils.copyProperties(entity,s);
+                list.add(s);
+            }
+            ret.setData(list);
+        }else {
+            ret.setMsg("fail");
+            ret.setCode(ResultBean.FAIL);
+        }
         return ret;
     }
 }

@@ -8,6 +8,6 @@ import java.util.List;
 public interface DangerRepository extends JpaRepository<DangersEntity,Integer> {
     Boolean existsDangersEntitiesByDangerCategory(String cat);
     DangersEntity findDangersEntityByDangerId(int id);
-    List<DangersEntity> findDangersEntitiesByDangerCompany(int id);
+    List<DangersEntity> findDangersEntitiesByDangerCompany(String name);
     List<DangersEntity> findDangersEntitiesByDangerCategory(String cat);
 }

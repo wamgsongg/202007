@@ -25,5 +25,9 @@ public class CompanysController {
     public ResultBean<Companys> companyLogin(@RequestParam("login") String login,@RequestParam("pwd") String pwd){
         return companysService.companyLogin(login,pwd);
     }
+    @PostMapping("/companys/update")
+    public ResultBean<Companys> companyUpdate(@RequestBody Companys companys){
+        return companysService.companyUpdate(companys);
+    }
 
 }

@@ -8,7 +8,7 @@ import lombok.Data;
 public class Staff {
     private int staffId;
     private String staffName;
-    private String staffPhoto;
+    private String staffPhone;
     private String staffCategory;
     private int staffCompany;
     private String staffLogin;

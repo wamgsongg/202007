@@ -72,7 +72,7 @@ public class DangersServiceImpl implements DangersService {
     }
 
     @Override
-    public ResultBean<List<Dangers>> getByCompany(int company) {
+    public ResultBean<List<Dangers>> getByCompany(String company) {
         ResultBean<List<Dangers>> ret = new ResultBean<>();
 
         List<Dangers> list = new ArrayList<>();

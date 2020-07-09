@@ -10,6 +10,6 @@ public interface DangersService {
     ResultBean<Dangers> create(Dangers dangers);
     ResultBean<Dangers> delete(Dangers dangers);
     ResultBean<Dangers> update(Dangers dangers);
-    ResultBean<List<Dangers>> getByCompany(int company);
+    ResultBean<List<Dangers>> getByCompany(String company);
     ResultBean<List<Dangers>> getByCat(String cat);
 }

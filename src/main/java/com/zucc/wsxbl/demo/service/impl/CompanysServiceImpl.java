@@ -68,4 +68,22 @@ public class CompanysServiceImpl implements CompanysService {
 
         return ret;
     }
+
+    @Override
+    public ResultBean<Companys> companyUpdate(Companys companys) {
+        ResultBean<Companys> ret = new ResultBean<>();
+        CompanysEntity entity = new CompanysEntity();
+        Companys c = Companys.builder().build();
+        entity = companysRepository.findCompanysEntityByCompanyLogin(companys.getCompanyLogin());
+        if (entity!=null){
+             MyBeanUtils.copyProperties(companys,entity);
+            companysRepository.save(entity);
+            MyBeanUtils.copyProperties(entity,c);
+            ret.setData(c);
+        }else {
+            ret.setCode(ResultBean.FAIL);
+            ret.setMsg("fail");
+        }
+        return  ret;
+    }
 }
