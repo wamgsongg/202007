@@ -78,7 +78,7 @@ public class DangersServiceImpl implements DangersService {
         List<Dangers> list = new ArrayList<>();
         List<DangersEntity> entities  =new ArrayList<>();
         entities = dangerRepository.findDangersEntitiesByDangerCompany(company);
-        if (entities.size()!=0){
+        if (entities!=null){
             for(DangersEntity e : entities){
                 Dangers d = Dangers.builder().build();
                 MyBeanUtils.copyProperties(e,d);
@@ -101,11 +101,16 @@ public class DangersServiceImpl implements DangersService {
         List<Dangers> list = new ArrayList<>();
         List<DangersEntity> entities  =new ArrayList<>();
         entities = dangerRepository.findDangersEntitiesByDangerCategory(cat);
-        if (entities.size()!=0){
+        if (entities!=null){
             for (DangersEntity e : entities){
                 Dangers d  = Dangers.builder().build();
-
+                MyBeanUtils.copyProperties(e,d);
+                list.add(d);
             }
+            ret.setData(list);
+        }else {
+            ret.setMsg("fail");
+            ret.setCode(ResultBean.FAIL);
         }
 
         return ret;

@@ -7,4 +7,6 @@ public interface CategoriesRepository extends JpaRepository<CategoriesEntity,Int
     CategoriesEntity findByCategoryId(int id);
     Boolean existsCategoriesEntityByCategoryName(String name);
     CategoriesEntity findCategoriesEntityByCategoryName(String name);
+
+
 }

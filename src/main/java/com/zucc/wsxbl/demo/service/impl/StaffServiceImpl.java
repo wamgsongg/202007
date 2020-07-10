@@ -113,7 +113,7 @@ public class StaffServiceImpl implements StaffService {
         List<Staff> list = new ArrayList<>();
         List<StaffEntity> entities = new ArrayList<>();
         entities = staffRepository.findStaffEntitiesByStaffCompany(cid);
-        if (entities.size()!=0){
+        if (entities!=null){
             for(StaffEntity entity : entities){
                 Staff s = Staff.builder().build();
                 MyBeanUtils.copyProperties(entity,s);

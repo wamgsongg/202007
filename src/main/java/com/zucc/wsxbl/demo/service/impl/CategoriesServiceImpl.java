@@ -10,6 +10,9 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class CategoriesServiceImpl implements CategoriesService{
 
@@ -69,14 +72,13 @@ public class CategoriesServiceImpl implements CategoriesService{
     }
 
     @Override
-    public ResultBean<Categories> update(String oldName, String newName) {
+    public ResultBean<Categories> update(int id, String name) {
         ResultBean<Categories> ret = new ResultBean<>();
         CategoriesEntity entity = new CategoriesEntity();
         Categories categories = Categories.builder().build();
-
-        if (categoriesRepository.existsCategoriesEntityByCategoryName(oldName)){
-            entity = categoriesRepository.findCategoriesEntityByCategoryName(oldName);
-            entity.setCategoryName(newName);
+        entity=categoriesRepository.findByCategoryId(id);
+        if (entity!=null){
+            entity.setCategoryName(name);
             categoriesRepository.save(entity);
             MyBeanUtils.copyProperties(entity,categories);
             ret.setData(categories);
@@ -85,5 +87,24 @@ public class CategoriesServiceImpl implements CategoriesService{
             ret.setCode(ResultBean.FAIL);
         }
         return ret;
+    }
+
+    @Override
+    public ResultBean<List<Categories>> getAll() {
+        ResultBean<List<Categories>> ret = new ResultBean<>();
+        List<Categories> list = new ArrayList<>();
+        List<CategoriesEntity> entities = categoriesRepository.findAll();
+        if (entities!=null){
+            for (CategoriesEntity entity:entities){
+                Categories category = Categories.builder().build();
+                MyBeanUtils.copyProperties(entity,category);
+                list.add(category);
+            }
+            ret.setData(list);
+        }else {
+            ret.setCode(ResultBean.FAIL);
+            ret.setMsg("fail");
+        }
+        return  ret;
     }
 }
